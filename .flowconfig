@@ -1,11 +1,37 @@
 [ignore]
+.*\.json$
+# Ignore only node packages with flow errors that don't have types we care
+# about.
+.*\/node_modules\/fbjs.*
+.*\/node_modules\/flow-coverage-report.*
+.*\/node_modules\/prop-types.*
+.*\/node_modules\/stylelint.*
+.*\/node_modules/.*/warning/.*
+dist
 
 [include]
 
 [libs]
+decls
+# This makes it so Flow can find SvgSprite. Consider it a load path.
+flow-stubs
 
 [lints]
 
 [options]
+# 'haste' fixes some issues regarding name_mapper. See:
+# https://github.com/facebook/flow/issues/1068
+module.system=haste
+# Leaving this in for reference while we play whack-a-mole on coverage issues.
+# module.file_ext=.css
+# file_ext has some defaults which get squashed when name_mapper is provided.
+module.file_ext=.js
+module.file_ext=.jsx
+module.name_mapper='.*\.svg$' -> 'SvgSprite'
+# Writing a .css file makes Flow pay attention to the .css file instead of the
+# .css.flow file like it is supposed to. Adding the name_mapper statement keeps
+# its focus on the .css.flow file, which is where the real type changes will be
+# observed.
+module.name_mapper='\(.*\)\.css' -> '\1.css.flow'
 
 [strict]
