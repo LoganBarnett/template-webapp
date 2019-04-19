@@ -3,8 +3,6 @@
   "version": "0.1.0",
   "main": "index.js",
   "author": "Logan Barnett <logustus@gmail.com>",
-  "license": "private",
-  "private": true,
   "devDependencies": {
     "@babel/core": "7.1.2",
     "@babel/plugin-transform-runtime": "7.1.0",
